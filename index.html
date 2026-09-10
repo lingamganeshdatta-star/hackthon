@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>GovBridge</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 240px;
+
+            background: #111827;
+            color: white;
+
+            padding: 25px 18px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #06b6d4
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo h2 {
+            font-size: 19px;
+        }
+
+        .logo p {
+            color: #94a3b8;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .menu div {
+            padding: 13px;
+
+            border-radius: 8px;
+
+            color: #94a3b8;
+
+            font-size: 14px;
+        }
+
+        .menu .active {
+            background: #1e293b;
+            color: white;
+        }
+
+        .system {
+            position: absolute;
+            bottom: 25px;
+
+            color: #86efac;
+
+            font-size: 12px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: 240px;
+
+            padding: 30px;
+
+            max-width: 1500px;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        header p {
+            margin-top: 6px;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+        .live {
+            color: #16a34a;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           NOTIFICATION
+        ========================= */
+
+        #message {
+            display: none;
+
+            padding: 13px 16px;
+
+            background: #ecfdf5;
+
+            border: 1px solid #bbf7d0;
+
+            color: #166534;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 16px;
+
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            padding: 20px;
+        }
+
+        .stat p {
+            color: #64748b;
+
+            font-size: 12px;
+
+            margin-bottom: 7px;
+        }
+
+        .stat h2 {
+            font-size: 25px;
+        }
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .grid {
+            display: grid;
+
+            grid-template-columns:
+                1.2fr 0.8fr;
+
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            font-size: 18px;
+
+            margin-bottom: 6px;
+        }
+
+        .card-description {
+            color: #64748b;
+
+            font-size: 12px;
+
+            margin-bottom: 22px;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 15px;
+        }
+
+        .field {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 6px;
+        }
+
+        .field label {
+            font-size: 12px;
+
+            font-weight: bold;
+
+            color: #475569;
+        }
+
+        .field input {
+            padding: 11px;
+
+            border: 1px solid #dbe2ea;
+
+            border-radius: 7px;
+
+            outline: none;
+        }
+
+        .field input:focus {
+            border-color: #2563eb;
+        }
+
+        /* =========================
+           CONSENT
+        ========================= */
+
+        .consent {
+            background: #f8fbff;
+
+            border: 1px solid #dbeafe;
+
+            border-radius: 9px;
+
+            padding: 15px;
+
+            margin-top: 20px;
+        }
+
+        .consent label {
+            display: flex;
+
+            gap: 10px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .consent p {
+            margin-left: 23px;
+
+            margin-top: 6px;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        button {
+            border: none;
+
+            border-radius: 8px;
+
+            padding: 12px 18px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .primary {
+            background: #2563eb;
+
+            color: white;
+
+            margin-top: 18px;
+
+            width: 100%;
+        }
+
+        .primary:hover {
+            background: #1d4ed8;
+        }
+
+        .secondary {
+            background: white;
+
+            color: #2563eb;
+
+            border: 1px solid #bfdbfe;
+
+            margin-top: 12px;
+
+            width: 100%;
+        }
+
+        .disabled {
+            background: #94a3b8;
+
+            cursor: not-allowed;
+        }
+
+        /* =========================
+           SERVICES
+        ========================= */
+
+        .service {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 13px;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 8px;
+
+            margin-bottom: 10px;
+        }
+
+        .service-left {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .service-icon {
+            width: 35px;
+            height: 35px;
+
+            border-radius: 8px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+        .service-name {
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .service-sub {
+            color: #94a3b8;
+
+            font-size: 10px;
+
+            margin-top: 3px;
+        }
+
+        .status {
+            font-size: 11px;
+
+            color: #94a3b8;
+        }
+
+        .verified {
+            color: #16a34a;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           CONFIDENCE
+        ========================= */
+
+        .confidence {
+            margin-top: 20px;
+
+            background: #f8fafc;
+
+            padding: 15px;
+
+            border-radius: 9px;
+        }
+
+        .confidence-title {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 8px;
+
+            font-size: 12px;
+        }
+
+        .progress {
+            width: 100%;
+
+            height: 8px;
+
+            background: #e2e8f0;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+        }
+
+        #progressBar {
+            height: 100%;
+
+            width: 0%;
+
+            background: #22c55e;
+
+            transition: width 0.5s;
+        }
+
+        /* =========================
+           PROFILE
+        ========================= */
+
+        .profile {
+            margin-top: 20px;
+        }
+
+        .profile-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+        }
+
+        .profile-item {
+            background: #f8fafc;
+
+            padding: 14px;
+
+            border-radius: 8px;
+        }
+
+        .profile-item span {
+            display: block;
+
+            color: #64748b;
+
+            font-size: 10px;
+
+            margin-bottom: 5px;
+        }
+
+        .profile-item strong {
+            font-size: 12px;
+        }
+
+        /* =========================
+           APPLICATION
+        ========================= */
+
+        .application {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            background: linear-gradient(
+                135deg,
+                #eff6ff,
+                white
+            );
+        }
+
+        .application button {
+            width: auto;
+
+            margin: 0;
+        }
+
+        #applicationResult {
+            display: none;
+
+            color: #15803d;
+
+            background: #dcfce7;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+        }
+
+        /* =========================
+           AUDIT
+        ========================= */
+
+        .audit-row {
+            display: grid;
+
+            grid-template-columns:
+                1fr 100px 100px;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid #f1f5f9;
+
+            font-size: 11px;
+        }
+
+        .audit-success {
+            color: #16a34a;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width: 1000px) {
+
+            .stats {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media(max-width: 700px) {
+
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+
+                padding: 18px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 10px;
+            }
+
+            .application {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            G
+        </div>
+
+        <div>
+            <h2>GovBridge</h2>
+            <p>Interoperability Platform</p>
+        </div>
+
+    </div>
+
+
+    <div class="menu">
+
+        <div class="active">
+            Dashboard
+        </div>
+
+        <div>
+            Citizen Services
+        </div>
+
+        <div>
+            Verification
+        </div>
+
+        <div>
+            Applications
+        </div>
+
+        <div>
+            Audit Logs
+        </div>
+
+    </div>
+
+
+    <div class="system">
+        ● System Operational
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<div class="main">
+
+
+<header>
+
+    <div>
+
+        <h1>
+            Government Interoperability
+        </h1>
+
+        <p>
+            Unified digital service delivery platform
+        </p>
+
+    </div>
+
+
+    <div class="live">
+        ● LIVE
+    </div>
+
+</header>
+
+
+<!-- MESSAGE -->
+
+<div id="message"></div>
+
+
+<!-- =========================================================
+     STATS
+========================================================= -->
+
+<div class="stats">
+
+    <div class="stat">
+
+        <p>
+            Connected Services
+        </p>
+
+        <h2>
+            4
+        </h2>
+
+    </div>
+
+
+    <div class="stat">
+
+        <p>
+            Verified Services
+        </p>
+
+        <h2 id="verifiedCount">
+            0
+        </h2>
+
+    </div>
+
+
+    <div class="stat">
+
+        <p>
+            Identity Confidence
+        </p>
+
+        <h2 id="confidence">
+            --
+        </h2>
+
+    </div>
+
+
+    <div class="stat">
+
+        <p>
+            Application
+        </p>
+
+        <h2 id="applicationStatus">
+            Pending
+        </h2>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN GRID
+========================================================= -->
+
+<div class="grid">
+
+
+<!-- =========================================================
+     CITIZEN INFORMATION
+========================================================= -->
+
+<div class="card">
+
+    <h2>
+        Citizen Information
+    </h2>
+
+    <p class="card-description">
+        Enter information once. GovBridge handles
+        interoperability between government services.
+    </p>
+
+
+    <div class="form-grid">
+
+
+        <div class="field">
+
+            <label>
+                Citizen ID
+            </label>
+
+            <input
+                id="citizenId"
+                value="CIT1001"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                id="name"
+                placeholder="Rahul Kumar"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Date of Birth
+            </label>
+
+            <input
+                id="dob"
+                type="date"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Aadhaar
+            </label>
+
+            <input
+                id="aadhaar"
+                placeholder="XXXXXX1234"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                PAN
+            </label>
+
+            <input
+                id="pan"
+                placeholder="ABCDE1234F"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- CONSENT -->
+
+    <div class="consent">
+
+        <label>
+
+            <input
+                type="checkbox"
+                id="consent"
+            >
+
+            I authorize GovBridge to access
+            my information.
+
+        </label>
+
+
+        <p>
+
+            Data will be used only for identity,
+            address and tax verification for the
+            selected government service.
+
+        </p>
+
+    </div>
+
+
+    <button
+        class="secondary"
+        onclick="grantConsent()"
+    >
+        Grant Data Consent
+    </button>
+
+
+    <button
+        class="primary"
+        onclick="verifyCitizen()"
+    >
+        Verify Citizen →
+    </button>
+
+</div>
+
+
+<!-- =========================================================
+     GOVERNMENT SERVICES
+========================================================= -->
+
+<div class="card">
+
+    <h2>
+        Government Services
+    </h2>
+
+    <p class="card-description">
+        Connected digital services
+    </p>
+
+
+    <div class="service">
+
+        <div class="service-left">
+
+            <div class="service-icon">
+                A
+            </div>
+
+            <div>
+
+                <div class="service-name">
+                    Aadhaar
+                </div>
+
+                <div class="service-sub">
+                    Identity verification
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="aadhaarStatus"
+            class="status"
+        >
+            Waiting
+        </div>
+
+    </div>
+
+
+    <div class="service">
+
+        <div class="service-left">
+
+            <div class="service-icon">
+                P
+            </div>
+
+            <div>
+
+                <div class="service-name">
+                    PAN
+                </div>
+
+                <div class="service-sub">
+                    Tax identity
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="panStatus"
+            class="status"
+        >
+            Waiting
+        </div>
+
+    </div>
+
+
+    <div class="service">
+
+        <div class="service-left">
+
+            <div class="service-icon">
+                G
+            </div>
+
+            <div>
+
+                <div class="service-name">
+                    GST
+                </div>
+
+                <div class="service-sub">
+                    Tax registration
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="gstStatus"
+            class="status"
+        >
+            Waiting
+        </div>
+
+    </div>
+
+
+    <div class="service">
+
+        <div class="service-left">
+
+            <div class="service-icon">
+                ⌂
+            </div>
+
+            <div>
+
+                <div class="service-name">
+                    Address
+                </div>
+
+                <div class="service-sub">
+                    Address verification
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="addressStatus"
+            class="status"
+        >
+            Waiting
+        </div>
+
+    </div>
+
+
+    <!-- CONFIDENCE -->
+
+    <div class="confidence">
+
+        <div class="confidence-title">
+
+            <span>
+                Identity Match
+            </span>
+
+            <strong id="confidenceText">
+                0%
+            </strong>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div id="progressBar"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     UNIFIED PROFILE
+========================================================= -->
+
+<div
+    class="card profile"
+    id="profileCard"
+    style="display:none;"
+>
+
+    <h2>
+        Unified Citizen Profile
+    </h2>
+
+    <p class="card-description">
+        Information aggregated from multiple
+        government services.
+    </p>
+
+
+    <div class="profile-grid">
+
+
+        <div class="profile-item">
+
+            <span>
+                Full Name
+            </span>
+
+            <strong id="profileName">
+                --
+            </strong>
+
+        </div>
+
+
+        <div class="profile-item">
+
+            <span>
+                Date of Birth
+            </span>
+
+            <strong id="profileDob">
+                --
+            </strong>
+
+        </div>
+
+
+        <div class="profile-item">
+
+            <span>
+                Address
+            </span>
+
+            <strong id="profileAddress">
+                --
+            </strong>
+
+        </div>
+
+
+        <div class="profile-item">
+
+            <span>
+                PAN
+            </span>
+
+            <strong id="profilePan">
+                --
+            </strong>
+
+        </div>
+
+
+        <div class="profile-item">
+
+            <span>
+                PAN Status
+            </span>
+
+            <strong id="profilePanStatus">
+                --
+            </strong>
+
+        </div>
+
+
+        <div class="profile-item">
+
+            <span>
+                GST Status
+            </span>
+
+            <strong id="profileGstStatus">
+                --
+            </strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     APPLICATION
+========================================================= -->
+
+<div class="card application">
+
+    <div>
+
+        <h2>
+            Business License
+        </h2>
+
+        <p class="card-description">
+
+            Apply using your verified unified
+            citizen profile.
+
+        </p>
+
+    </div>
+
+
+    <button
+        class="primary"
+        onclick="applyLicense()"
+    >
+        Apply for Business License
+    </button>
+
+
+    <div id="applicationResult"></div>
+
+</div>
+
+
+<!-- =========================================================
+     AUDIT LOG
+========================================================= -->
+
+<div
+    class="card"
+    id="auditCard"
+    style="display:none;"
+>
+
+    <h2>
+        Interoperability Audit Trail
+    </h2>
+
+    <p class="card-description">
+        Record of government service interactions.
+    </p>
+
+
+    <div id="auditList"></div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+const API = "http://127.0.0.1:8000";
+
+let verified = false;
+
+
+// =========================================================
+// MESSAGE
+// =========================================================
+
+function showMessage(text) {
+
+    const message =
+        document.getElementById("message");
+
+    message.innerText = text;
+
+    message.style.display = "block";
+
+}
+
+
+// =========================================================
+// GET CITIZEN DATA
+// =========================================================
+
+function getCitizenData() {
+
+    return {
+
+        citizen_id:
+            document.getElementById("citizenId").value,
+
+        name:
+            document.getElementById("name").value,
+
+        dob:
+            document.getElementById("dob").value,
+
+        aadhaar:
+            document.getElementById("aadhaar").value,
+
+        pan:
+            document.getElementById("pan").value
+
+    };
+
+}
+
+
+// =========================================================
+// GRANT CONSENT
+// =========================================================
+
+async function grantConsent() {
+
+    const citizen =
+        getCitizenData();
+
+
+    if (
+        !document.getElementById("consent").checked
+    ) {
+
+        alert(
+            "Please check the consent box first."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API + "/api/consent",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        citizen_id:
+                            citizen.citizen_id,
+
+                        purpose:
+                            "BUSINESS_LICENSE",
+
+                        identity: true,
+
+                        address: true,
+
+                        tax_status: true
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail || "Consent failed"
+            );
+
+        }
+
+
+        showMessage(
+            "✓ " + data.message
+        );
+
+    }
+
+    catch (error) {
+
+        alert(
+            "Error: " + error.message
+        );
+
+    }
+
+}
+
+
+// =========================================================
+// VERIFY CITIZEN
+// =========================================================
+
+async function verifyCitizen() {
+
+    const citizen =
+        getCitizenData();
+
+
+    if (!citizen.name) {
+
+        alert(
+            "Please enter the citizen name."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !document.getElementById("consent").checked
+    ) {
+
+        alert(
+            "Please grant consent first."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        showMessage(
+            "Connecting to government services..."
+        );
+
+
+        const response =
+            await fetch(
+                API + "/api/verify",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(citizen)
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail || "Verification failed"
+            );
+
+        }
+
+
+        verified = true;
+
+
+        // ================================
+        // SERVICE STATUS
+        // ================================
+
+        document.getElementById(
+            "aadhaarStatus"
+        ).innerHTML =
+            '<span class="verified">✓ VERIFIED</span>';
+
+
+        document.getElementById(
+            "panStatus"
+        ).innerHTML =
+            '<span class="verified">✓ VERIFIED</span>';
+
+
+        document.getElementById(
+            "gstStatus"
+        ).innerHTML =
+            '<span class="verified">✓ VERIFIED</span>';
+
+
+        document.getElementById(
+            "addressStatus"
+        ).innerHTML =
+            '<span class="verified">✓ VERIFIED</span>';
+
+
+        // ================================
+        // CONFIDENCE
+        // ================================
+
+        const confidence =
+            data.identity_match
+                .overall_confidence;
+
+
+        document.getElementById(
+            "confidence"
+        ).innerText =
+            confidence + "%";
+
+
+        document.getElementById(
+            "confidenceText"
+        ).innerText =
+            confidence + "%";
+
+
+        document.getElementById(
+            "progressBar"
+        ).style.width =
+            confidence + "%";
+
+
+        document.getElementById(
+            "verifiedCount"
+        ).innerText = "4";
+
+
+        // ================================
+        // PROFILE
+        // ================================
+
+        const profile =
+            data.unified_profile;
+
+
+        document.getElementById(
+            "profileName"
+        ).innerText =
+            profile.name;
+
+
+        document.getElementById(
+            "profileDob"
+        ).innerText =
+            profile.date_of_birth;
+
+
+        document.getElementById(
+            "profileAddress"
+        ).innerText =
+            profile.address;
+
+
+        document.getElementById(
+            "profilePan"
+        ).innerText =
+            profile.pan;
+
+
+        document.getElementById(
+            "profilePanStatus"
+        ).innerText =
+            profile.pan_status;
+
+
+        document.getElementById(
+            "profileGstStatus"
+        ).innerText =
+            profile.gst_status;
+
+
+        document.getElementById(
+            "profileCard"
+        ).style.display =
+            "block";
+
+
+        showMessage(
+            "✓ Citizen successfully verified across government services."
+        );
+
+
+        loadAudit();
+
+    }
+
+    catch (error) {
+
+        alert(
+            "Verification Error: "
+            + error.message
+        );
+
+    }
+
+}
+
+
+// =========================================================
+// BUSINESS LICENSE
+// =========================================================
+
+async function applyLicense() {
+
+    if (!verified) {
+
+        alert(
+            "Please verify the citizen first."
+        );
+
+        return;
+
+    }
+
+
+    const citizen =
+        getCitizenData();
+
+
+    try {
+
+        const response =
+            await fetch(
+                API + "/api/application",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(citizen)
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail || "Application failed"
+            );
+
+        }
+
+
+        document.getElementById(
+            "applicationStatus"
+        ).innerText =
+            "Submitted";
+
+
+        const result =
+            document.getElementById(
+                "applicationResult"
+            );
+
+
+        result.style.display =
+            "block";
+
+
+        result.innerHTML =
+            "✓ Application Submitted<br>" +
+            "Application ID: " +
+            data.application_id;
+
+
+        showMessage(
+            "✓ Business license application submitted successfully."
+        );
+
+
+        loadAudit();
+
+    }
+
+    catch (error) {
+
+        alert(
+            "Application Error: "
+            + error.message
+        );
+
+    }
+
+}
+
+
+// =========================================================
+// AUDIT LOG
+// =========================================================
+
+async function loadAudit() {
+
+    const citizenId =
+        document.getElementById(
+            "citizenId"
+        ).value;
+
+
+    try {
+
+        const response =
+            await fetch(
+                API +
+                "/api/audit/" +
+                citizenId
+            );
+
+
+        const data =
+            await response.json();
+
+
+        const auditCard =
+            document.getElementById(
+                "auditCard"
+            );
+
+
+        const auditList =
+            document.getElementById(
+                "auditList"
+            );
+
+
+        auditCard.style.display =
+            "block";
+
+
+        auditList.innerHTML = "";
+
+
+        data.logs.forEach(
+            function(log) {
+
+                const row =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                row.className =
+                    "audit-row";
+
+
+                row.innerHTML = `
+
+                    <div>
+
+                        <strong>
+                            ${log.service}
+                        </strong>
+
+                        <br>
+
+                        ${log.action}
+
+                    </div>
+
+                    <div class="audit-success">
+                        ${log.status}
+                    </div>
+
+                    <div>
+                        ${log.response_time}
+                    </div>
+
+                `;
+
+
+                auditList.appendChild(row);
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Audit error:",
+            error
+        );
+
+    }
+
+}
+
+
+</script>
+
+</body>
+
+</html>
